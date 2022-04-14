@@ -7,5 +7,6 @@ Timer::~Timer() {
   auto duration =
       std::chrono::duration_cast<std::chrono::milliseconds>(m_end - m_start);
 
-  std::cout << "\n[elapsed] " << duration.count() << " ms" << '\n';
+  std::cout << colors::FBLK << "[elapsed] " << duration.count() << " ms"
+            << colors::RS << '\n';
 }

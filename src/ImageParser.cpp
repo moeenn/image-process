@@ -1,6 +1,16 @@
 #include "./ImageParser.hpp"
 
-ImageParser::ImageParser(const std::string &path) { m_file.open(path); }
+ImageParser::ImageParser(const std::string &path) { 
+  const bool exists = std::filesystem::is_regular_file(path);
+  if (!exists) {
+    std::stringstream ss;
+    ss << "File not found: " << path;
+
+    throw std::runtime_error{ss.str()};
+  }
+
+  m_file.open(path); 
+}
 
 uint ImageParser::toUint(const std::string &str) {
   uint result;

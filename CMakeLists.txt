@@ -1,17 +1,13 @@
-cmake_minimum_required(VERSION 3.0)
+cmake_minimum_required(VERSION 3.5)
 
-set(CMAKE_BUILD_TYPE Debug)
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wextra -Wall -std=c++17 -Wc++17-extensions")
+set (project_name "image-process")
+project (${project_name})
 
-project(image-process)
+set (CMAKE_BUILD_TYPE Debug)
+set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wextra -Werror -Wall -std=c++17 -Wc++17-extensions")
+set (source_dir "${PROJECT_SOURCE_DIR}/src/")
 
-add_executable(
-  image-process
-  src/main.cpp
-  src/Timer.cpp
-  src/RGB.cpp
-  src/Image.cpp
-  src/ImageParser.cpp
-)
+file (GLOB source_files "${source_dir}/*.cpp")
+add_executable(${project_name} ${source_files})
 
 set(EXECUTABLE_OUTPUT_PATH "bin")

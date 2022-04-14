@@ -5,6 +5,8 @@
 #include <string>
 #include <sstream>
 #include <memory>
+#include <filesystem>
+#include <stdexcept>
 #include "./Image.hpp"
 #include "./RGB.hpp"
 

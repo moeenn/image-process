@@ -1,6 +1,7 @@
 #pragma once
 #include <chrono>
 #include <iostream>
+#include "./Colors.hpp"
 
 class Timer {
 private:
