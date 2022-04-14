@@ -1,4 +1,4 @@
-# args-parser
+# image-process
 A C++ library for processing images
 
 ## Compilation
