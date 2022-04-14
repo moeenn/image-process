@@ -1,25 +1,17 @@
 #pragma once
-#include <iostream>
-#include <vector>
-#include <fstream>
-#include <string>
-#include <sstream>
-#include <memory>
-#include <filesystem>
-#include <stdexcept>
 #include "./Image.hpp"
 #include "./RGB.hpp"
+#include <filesystem>
+#include <fstream>
+#include <iostream>
+#include <memory>
+#include <optional>
+#include <sstream>
+#include <stdexcept>
+#include <string>
+#include <vector>
 
-class ImageParser {
-private:
-  std::ifstream m_file;
-  std::vector<RGB> m_content;
-
-  uint toUint(const std::string &str);
-
-public:
-  ImageParser(const std::string &path);
-  std::unique_ptr<Image> parse();
-
-  ~ImageParser();
-};
+namespace ImageParser {
+uint toUint(const std::string &str);
+std::optional<std::unique_ptr<Image>> parse(const std::string &path);
+} // namespace ImageParser

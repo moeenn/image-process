@@ -4,3 +4,5 @@ CMakeCache.txt
 Makefile
 bin
 test_images/
+.cache
+compile_commands.json

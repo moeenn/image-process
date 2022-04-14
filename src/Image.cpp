@@ -18,7 +18,10 @@ std::string Image::headers() const {
   return ss.str();
 }
 
-std::vector<RGB> Image::content() const { return m_content; }
+std::vector<RGB> Image::content() const { 
+  return m_content; 
+}
+
 void Image::update(const std::vector<RGB> &content) { m_content = content; }
 
 void Image::save(const std::string &path) {
