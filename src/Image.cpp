@@ -33,7 +33,7 @@ void Image::save(const std::string &path) {
 
   for (const RGB &color : m_content) {
     m_file << color.red() << ' ' << color.green() << ' ' << color.blue()
-           << '\n';
+           << ' ';
   }
 }
 

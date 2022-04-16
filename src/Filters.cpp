@@ -3,6 +3,7 @@
 void Filters::grayscale(Image &image) {
   auto current_content = image.content();
   std::vector<RGB> updated_content{};
+  updated_content.reserve(image.height() * image.width());
 
   for (const RGB &rgb : current_content) {
     const uint red = rgb.red(), green = rgb.green(), blue = rgb.blue();
