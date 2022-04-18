@@ -1,6 +1,7 @@
 #pragma once
 #include "./RGB.hpp"
 #include <fstream>
+#include <functional>
 #include <iostream>
 #include <sstream>
 #include <string>
@@ -14,6 +15,7 @@ private:
   std::string m_type;
   std::vector<RGB> m_content;
   std::ofstream m_file;
+  std::function<void(RGB &)> m_filter;
 
 public:
   Image(const uint height, const uint width, const uint max_rgb = 255,
@@ -25,6 +27,7 @@ public:
   std::string headers() const;
 
   std::vector<RGB> content() const;
+  void applyFilters(std::function<void(RGB &)>);
   void update(const std::vector<RGB> &content);
   void save(const std::string &path);
 

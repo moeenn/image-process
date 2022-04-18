@@ -1,6 +1,6 @@
 #pragma once
-#include "./Image.hpp"
+#include "./RGB.hpp"
 
 namespace Filters {
-void grayscale(Image &image);
+void grayscale(RGB &rgb);
 } // namespace Filters

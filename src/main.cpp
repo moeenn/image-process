@@ -1,29 +1,30 @@
+#include "./ArgsParser.hpp"
 #include "./Colors.hpp"
 #include "./Filters.hpp"
 #include "./ImageParser.hpp"
 #include "./Timer.hpp"
 #include <iostream>
-#include <unordered_map>
 
-int main() {
+int main(int argc, char *argv[]) {
   Timer t{};
+  ArgsParser parser{argc, argv};
 
-  std::unordered_map<std::string, std::string> images{
-      {"./test_images/01.ppm", "./test_images/01_out.ppm"},
-      {"./test_images/02.ppm", "./test_images/02_out.ppm"},
-      {"./test_images/03.ppm", "./test_images/03_out.ppm"},
-      { "./test_images/04.ppm", "./test_images/04_out.ppm" },
-  };
-
-  for (const auto&[src, dest] : images ) {
-    auto image = ImageParser::parse(src);
-    if (!image) {
-      std::cerr << colors::FRED << "[error] Failed to read file" << colors::RS
-                << '\n';
-      return 1;
-    }
-
-    Filters::grayscale(*(image.value()));
-    image.value()->save(dest);
+  std::string in, out;
+  {
+    parser.flag("-i", "Input PPM file", &in);
+    parser.flag("-o", "Output PPM file", &out);
+    parser.parse();
   }
+
+  std::cout << colors::FGRN << "Processing " << in << colors::RS << '\n';
+
+  auto image = ImageParser::parse(in);
+  if (!image) {
+    std::cerr << colors::FRED << "[error] Failed to read file: " << in
+              << colors::RS << '\n';
+    return 1;
+  }
+
+  image.value()->applyFilters(Filters::grayscale);
+  image.value()->save(out);
 }
