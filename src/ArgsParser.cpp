@@ -1,16 +1,17 @@
 #include "./ArgsParser.hpp"
-#include <cstdlib>
 
 ArgsParser::ArgsParser(int argc, char *argv[]) : m_count(argc) {
+  m_args.reserve(argc);
+
   for (int i = 0; i < argc; i++)
-    m_args.push_back(std::string(argv[i]));
+    m_args.push_back(argv[i]);
 
   m_bin_name = m_args[0];
 }
 
 /** register a flag with useful information */
-void ArgsParser::flag(std::string flagName, std::string desc,
-                      std::string *target) {
+void ArgsParser::flag(const char* flagName, const char* desc,
+                      const char* *target) {
 
   Flag flag{flagName, desc, target};
   m_flags.push_back(flag);
@@ -30,9 +31,10 @@ void ArgsParser::parse() {
 }
 
 /** find provided flag in the list of all flags */
-int ArgsParser::getFlagIndex(std::string flag) {
+int ArgsParser::getFlagIndex(const char* flag) {
   for (uint i = 0; i < m_count; i++) {
-    if (m_args[i] == flag)
+    
+    if (strcmp(m_args[i], flag) == 0)
       return i;
   }
 

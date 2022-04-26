@@ -9,6 +9,5 @@ Timer::~Timer() {
   auto duration =
       std::chrono::duration_cast<std::chrono::milliseconds>(m_end - m_start);
 
-  std::cout << colors::FBLK << '[' << m_tag << "] " << duration.count() << " ms"
-            << colors::RS << '\n';
+  std::cout << '[' << m_tag << "] " << duration.count() << " ms\n";
 }

@@ -1,30 +1,35 @@
 #include "./ArgsParser.hpp"
-#include "./Colors.hpp"
-#include "./Filters.hpp"
-#include "./ImageParser.hpp"
 #include "./Timer.hpp"
+#include "./ppm.hpp"
+#include <filesystem>
 #include <iostream>
+#include <string>
 
 int main(int argc, char *argv[]) {
   Timer t{};
   ArgsParser parser{argc, argv};
 
-  std::string in, out;
+  const char *in, *out;
   {
     parser.flag("-i", "Input PPM file", &in);
     parser.flag("-o", "Output PPM file", &out);
     parser.parse();
   }
 
-  std::cout << colors::FGRN << "Processing " << in << colors::RS << '\n';
+  std::ifstream src;
+  std::ofstream dest;
 
-  auto image = ImageParser::parse(in);
-  if (!image) {
-    std::cerr << colors::FRED << "[error] Failed to read file: " << in
-              << colors::RS << '\n';
+  const bool exists = std::filesystem::is_regular_file(in);
+  if (!exists) {
+    std::cerr << "Failed to open input file\n";
     return 1;
   }
 
-  image.value()->applyFilters(Filters::grayscale);
-  image.value()->save(out);
+  src.open(in);
+  dest.open(out);
+
+  ppm::process(src, dest, [](uint &red, uint &green, uint &blue) {
+    const uint avg = (red + green + blue) / 3;
+    red = green = blue = avg;
+  });
 }
