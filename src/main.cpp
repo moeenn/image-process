@@ -28,8 +28,8 @@ int main(int argc, char *argv[]) {
   src.open(in);
   dest.open(out);
 
-  ppm::process(src, dest, [](uint &red, uint &green, uint &blue) {
-    const uint avg = (red + green + blue) / 3;
-    red = green = blue = avg;
+  ppm::process(src, dest, [](uint &r, uint &g, uint &b) {
+    const uint avg = (r + g + b) / 3;
+    r = g = b = avg;
   });
 }
