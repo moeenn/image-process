@@ -1,27 +1,59 @@
 #pragma once
-
+#include <cstring>
+#include <optional>
 #include <iostream>
-#include <vector>
-#include <cstdlib>
-#include <string.h>
-
-struct Flag {
-  const char* flag;
-  const char* desc;
-  const char* *target;
-};
 
 class ArgsParser {
 private:
-  uint m_count;
-  std::vector<char*> m_args;
-  char* m_bin_name;
-  std::vector<Flag> m_flags;
-  int getFlagIndex(const char* flag);
+  int m_argc;
+  char **m_argv;
+
+  std::optional<const char *> read_flag(const char *flag) {
+    int i;
+    for (i = 0; i < m_argc; i++) {
+      if (strcmp(m_argv[i], flag) == 0) {
+        if ((i + 1) < m_argc) {
+          return m_argv[i + 1];
+        }
+      }
+    }
+
+    return {};
+  }
+
+  bool read_optional_flag(const char *flag) {
+    int i;
+    for (i = 0; i < m_argc; i++) {
+      if (strcmp(m_argv[i], flag) == 0) {
+        return true;
+      }
+    }
+
+    return false;
+  }  
 
 public:
-  ArgsParser(int argc, char *argv[]);
-  void flag(const char* flagName, const char*, const char* *target);
-  void parse();
-  void printHelp();
+  ArgsParser(int argc, char **argv) : m_argc(argc), m_argv(argv) {}
+
+  std::optional<int> Int(const char *flag) {
+    auto value = read_flag(flag);
+    if (!value) {
+      return {};
+    }
+
+    return std::atoi(*value);
+  }
+
+  std::optional<std::string> String(const char *flag) {
+    auto value = read_flag(flag);   
+    if (!value) {
+      return {};
+    }
+
+    return std::string{*value};
+  }
+
+  bool Bool(const char* flag) {
+    return read_optional_flag(flag);
+  }
 };

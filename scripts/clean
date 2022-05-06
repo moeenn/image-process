@@ -1,7 +1,8 @@
 #!/bin/sh
 
-rm -rv ./CMakeFiles
-rm -v cmake_install.cmake
-rm -v CMakeCache.txt
-rm -v Makefile
-rm -v compile_commands.json
+rm -rv ./CMakeFiles 2> /dev/null
+rm -v cmake_install.cmake 2> /dev/null
+rm -v CMakeCache.txt 2> /dev/null
+rm -v Makefile 2> /dev/null
+rm -v compile_commands.json 2> /dev/null
+rm -rvf ./.cache 2> /dev/null
