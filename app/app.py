@@ -3,6 +3,8 @@ import os
 
 
 class Application:
+    ignored_exts: list[str] = [".DS_Store"]
+
     def run(self, args: list[str]) -> None:
         if len(args) == 1:
             base_path = args[0]
@@ -12,6 +14,14 @@ class Application:
         files = os.listdir(base_path)
         for file in files:
             full_path = os.path.join(base_path, file)
+
+            if os.path.isdir(full_path):
+                continue
+
+            if self.is_ignored_file(full_path):
+                print("[Skip] ", full_path)
+                continue
+
             image = Image.open(full_path)
             image = image.convert("RGB")
 
@@ -22,6 +32,13 @@ class Application:
             out_path = os.path.join(out_dir, self.get_filename(file, "jpg"))
             print("[Done] ", out_path)
             image.save(out_path)
+
+    def is_ignored_file(self, path: str) -> bool:
+        for ignored_ext in self.ignored_exts:
+            if path.endswith(ignored_ext):
+                return True
+
+        return False
 
     def get_filename(self, file: str, ext: str) -> str:
         pieces = file.split(".")

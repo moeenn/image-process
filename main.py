@@ -3,9 +3,8 @@ import sys
 
 
 def main() -> None:
-    args = sys.argv[1:]
     app = Application()
-    app.run(args)
+    app.run(sys.argv[1:])
 
 
 if __name__ == "__main__":

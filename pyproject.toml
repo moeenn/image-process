@@ -1,9 +1,0 @@
-[project]
-name = "image-converter"
-version = "1.0.0"
-dependencies = [
-    "invoke",
-    "ruff",
-    "pyinstaller",
-    "pillow"
-]
