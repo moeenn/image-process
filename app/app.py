@@ -31,7 +31,7 @@ class Application:
 
             out_path = os.path.join(out_dir, self.get_filename(file, "jpg"))
             print("[Done] ", out_path)
-            image.convert("RGB").save(out_path)
+            image.save(out_path)
 
     def is_ignored_file(self, path: str) -> bool:
         for ignored_ext in self.ignored_exts:
