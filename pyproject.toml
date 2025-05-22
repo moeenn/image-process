@@ -4,6 +4,7 @@ version = "1.0.1"
 dependencies = [
   "invoke==2.2.0",
   "pillow==11.2.1",
+  "asyncio==3.4.3",
 ]
 
 [project.optional-dependencies]

@@ -8,7 +8,7 @@ ROOT = os.getcwd()
 APP = os.path.join(ROOT, "app")
 MAIN = os.path.join(ROOT, "main.py")
 BUILD_DIR = os.path.join(ROOT, "build")
-
+INSTALL_PREFIX = os.path.join("~", ".local", "bin")
 
 """
 Project task commands: Tasks can be executed using command `invoke <task-name>`
@@ -39,6 +39,11 @@ def lint(c, docs=False) -> None:
 @task
 def build(c, docs=False) -> None:
     c.run(f"pyinstaller --onefile --specpath={BUILD_DIR} {MAIN}")
+
+
+@task
+def install(c, docs=False) -> None:
+    c.run(f"mv -v ./dist/main {INSTALL_PREFIX}/image-convert")
 
 
 @task

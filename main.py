@@ -1,10 +1,11 @@
 from app.app import Application
 import sys
+import asyncio
 
 
 def main() -> None:
     app = Application()
-    app.run(sys.argv[1:])
+    asyncio.run(app.run(sys.argv[1:]))
 
 
 if __name__ == "__main__":
