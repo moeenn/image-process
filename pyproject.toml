@@ -1,0 +1,13 @@
+[project]
+name = "py-image-convert"
+version = "1.0.1"
+dependencies = [
+  "invoke==2.2.0",
+  "pillow==11.2.1",
+]
+
+[project.optional-dependencies]
+dev = [
+  "ruff==0.11.10",
+  "pyinstaller==6.13.0",
+]

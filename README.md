@@ -13,6 +13,9 @@ $ source .venv/bin/activate
 
 # install project dependencies
 $ pip install .
+
+# install optional dependencies
+$ pip install .[dev]
 ```
 
 
@@ -30,7 +33,7 @@ $ invoke fmt
 $ invoke lint
 
 # compile to stand-alone binary
-$ invoke compile
+$ invoke build
 
 # perform temporary files cleanup
 $ invoke clean
