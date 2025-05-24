@@ -4,6 +4,7 @@ version = "1.0.1"
 dependencies = [
   "invoke==2.2.0",
   "pillow==11.2.1",
+  "pillow-avif-plugin==1.5.2",
   "asyncio==3.4.3",
 ]
 
