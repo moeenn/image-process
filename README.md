@@ -1,5 +1,5 @@
 ## image-converter
-Take input of various types of images and convert them to uniform output format.
+Take input of various types of images and convert & compress them to uniform output.
 
 
 ### Setup
