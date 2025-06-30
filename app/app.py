@@ -1,20 +1,19 @@
 from PIL import Image
 import pillow_avif
 import os
-import asyncio
 
 
 class Application:
     ignored_exts: list[str] = [".DS_Store"]
+    max_size = (1920, 1080)
 
-    async def run(self, args: list[str]) -> None:
+    def run(self, args: list[str]) -> None:
         if len(args) == 1:
             base_path = args[0]
         else:
             base_path = os.getcwd()
 
         files = os.listdir(base_path)
-        futures = []
         for file in files:
             full_path = os.path.join(base_path, file)
             if os.path.isdir(full_path):
@@ -24,16 +23,15 @@ class Application:
                 print("[Skip] ", full_path)
                 continue
 
-            future = self.process_image(full_path, base_path, file)
-            futures.append(future)
+            try:
+                self.process_image(full_path, base_path, file)
+            except Exception as ex:
+                print("error:", ex)
+                print(f"[Skipping] {file}")
 
-        # wait for all tasks to complete
-        await asyncio.gather(*futures)
-
-    async def process_image(self, full_path: str, base_path: str, file: str):
-        image = Image.open(full_path)
-        image = image.convert("RGB")
-
+    def process_image(self, full_path: str, base_path: str, file: str):
+        # uniform convert and resize image.
+        image = Image.open(full_path).convert("RGB").resize(self.max_size)
         out_dir = os.path.join(base_path, "out")
         if not os.path.exists(out_dir):
             os.makedirs(out_dir)

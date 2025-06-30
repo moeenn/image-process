@@ -5,11 +5,11 @@ dependencies = [
   "invoke==2.2.0",
   "pillow==11.2.1",
   "pillow-avif-plugin==1.5.2",
-  "asyncio==3.4.3",
 ]
 
 [project.optional-dependencies]
 dev = [
+  "invoke==2.2.0",
   "ruff==0.11.10",
   "pyinstaller==6.13.0",
 ]
