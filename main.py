@@ -1,10 +1,9 @@
 from app import Application
-import sys
 
 
 def main() -> None:
     app = Application()
-    app.run(sys.argv[1:])
+    app.run()
 
 
 if __name__ == "__main__":
@@ -13,4 +12,4 @@ if __name__ == "__main__":
     except KeyboardInterrupt:
         print("ctrl+c: shutting down...")
     except Exception as err:
-        print("error: ", err)
+        print("error:", err)

@@ -1,21 +1,20 @@
+import os
 from PIL import Image
 import pillow_avif
-import os
+from .args import CommandLineArgs
 
 
 class Application:
     ignored_exts: list[str] = [".DS_Store"]
-    max_size = (1920, 1080)
+    args: CommandLineArgs
 
-    def run(self, args: list[str]) -> None:
-        if len(args) == 1:
-            base_path = args[0]
-        else:
-            base_path = os.getcwd()
+    def __init__(self) -> None:
+        self.args = CommandLineArgs()
 
-        files = os.listdir(base_path)
+    def run(self) -> None:
+        files = os.listdir(self.args.base_path)
         for file in files:
-            full_path = os.path.join(base_path, file)
+            full_path = os.path.join(self.args.base_path, file)
             if os.path.isdir(full_path):
                 continue
 
@@ -24,14 +23,16 @@ class Application:
                 continue
 
             try:
-                self.process_image(full_path, base_path, file)
+                self.process_image(full_path, self.args.base_path, file)
             except Exception as ex:
                 print("error:", ex)
                 print(f"[Skipping] {file}")
 
     def process_image(self, full_path: str, base_path: str, file: str):
         # uniform convert and resize image.
-        image = Image.open(full_path).convert("RGB").resize(self.max_size)
+        image = Image.open(full_path).convert("RGB")
+        image.thumbnail(self.args.dimensions)
+
         out_dir = os.path.join(base_path, "out")
         if not os.path.exists(out_dir):
             os.makedirs(out_dir)

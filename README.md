@@ -2,6 +2,26 @@
 Take input of various types of images and convert & compress them to uniform output.
 
 
+### Usage
+
+```
+usage: image-process [-h] [-i INPUT] [-c] [-d DIMENSIONS]
+Compress and convert image files
+
+options:
+  -h, --help            show this help message and exit
+  -i INPUT, --input INPUT
+                        path to input directory
+  -c, --compress        Apply compression on input images
+  -d DIMENSIONS, --dimensions DIMENSIONS
+                        Max dimensions for compressed images (format: width,heigth)
+
+example:
+  image-compress --input . --compress -dimensions 1024,768
+  image-compress -c
+```
+
+
 ### Setup
 
 ```bash
@@ -19,10 +39,10 @@ $ pip install .[dev]
 ```
 
 
-### Usage
+### Development commands
 
 ```bash
-# start the project
+# run the project
 $ invoke start
 
 # run tests
