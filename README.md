@@ -1,5 +1,5 @@
-## image-converter
-Take input of various types of images and convert & compress them to uniform output.
+## image-process
+A CLI utility to convert & compress images to uniform output.
 
 
 ### Usage
