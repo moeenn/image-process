@@ -8,3 +8,5 @@ build/
 .*_cache
 dist/
 .DS_Store
+main.bin/
+main.dist/
