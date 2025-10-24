@@ -42,18 +42,14 @@ $ pip install .[dev]
 ### Development commands
 
 ```bash
-# run the project
-$ invoke start
+# run the project.
+$ make ru
 
-# run tests
-$ invoke test
+# format and lint code.
+$ make fmt lint
 
-# format and lint code
-$ invoke fmt 
-$ invoke lint
-
-# compile to stand-alone binary
-$ invoke build
+# compile to stand-alone binary and install.
+$ make build install
 
 # perform temporary files cleanup
 $ invoke clean

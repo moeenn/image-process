@@ -4,6 +4,7 @@ version = "1.0.1"
 dependencies = [
   "pillow==11.2.1",
   "pillow-avif-plugin==1.5.2",
+  "pillow-heif==1.1.1"
 ]
 
 [project.optional-dependencies]

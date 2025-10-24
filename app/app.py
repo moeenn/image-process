@@ -1,6 +1,7 @@
 import os
 from PIL import Image
 import pillow_avif
+from pillow_heif import register_heif_opener
 from .args import CommandLineArgs
 
 
@@ -10,6 +11,7 @@ class Application:
 
     def __init__(self) -> None:
         self.args = CommandLineArgs()
+        register_heif_opener()
 
     def run(self) -> None:
         files = os.listdir(self.args.base_path)
@@ -19,14 +21,13 @@ class Application:
                 continue
 
             if self.is_ignored_file(full_path):
-                print("[Skip] ", full_path)
+                print("[Skipping] ", full_path)
                 continue
 
             try:
                 self.process_image(full_path, self.args.base_path, file)
             except Exception as ex:
-                print("error:", ex)
-                print(f"[Skipping] {file}")
+                print(f"[Skipping] {file}, error: ", ex)
 
     def process_image(self, full_path: str, base_path: str, file: str):
         # uniform convert and resize image.
