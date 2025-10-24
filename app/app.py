@@ -29,7 +29,7 @@ class Application:
 
     def mark_done(self) -> None:
         self.done_count += 1
-        print(f"\rCompleted: {self.done_count:03d}/{self.image_count:03d}", end="")
+        print(f"\rCompleted: {self.done_count:3d} /{self.image_count:3d}", end="")
 
     def run(self) -> None:
         errored: list[ErroredImage] = []
