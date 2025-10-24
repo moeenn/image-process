@@ -21,13 +21,13 @@ class Application:
                 continue
 
             if self.is_ignored_file(full_path):
-                print("[Skipping] ", full_path)
+                print("[Skipping]", full_path)
                 continue
 
             try:
                 self.process_image(full_path, self.args.base_path, file)
             except Exception as ex:
-                print(f"[Skipping] {file}, error: ", ex)
+                print(f"[Skipping] {file}, error:", ex)
 
     def process_image(self, full_path: str, base_path: str, file: str):
         # uniform convert and resize image.
@@ -39,7 +39,7 @@ class Application:
             os.makedirs(out_dir)
 
         out_path = os.path.join(out_dir, self.get_filename(file, "jpg"))
-        print("[Done] ", out_path)
+        print("[Done]", out_path)
         image.save(out_path)
 
     def is_ignored_file(self, path: str) -> bool:
