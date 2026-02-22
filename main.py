@@ -1,9 +1,13 @@
-from app import Application
+# from app import Application
+from app.upscale import main as entrypoint
+import sys
 
 
 def main() -> None:
-    app = Application()
-    app.run()
+    # app = Application()
+    # app.run()
+    args = sys.argv[1:]
+    entrypoint(args)
 
 
 if __name__ == "__main__":

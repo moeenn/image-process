@@ -40,7 +40,7 @@ def postprocess(image):
     return image
 
 
-def upscale_image(input_path: str, model_path="ESPCN_x3.pb", model_name="espcn") -> None:
+def upscale_image(input_path: str, model_path="./app/models/ESPCN_x3.pb", model_name="espcn") -> None:
     img = cv2.imread(input_path)
     sr = cv2.dnn_superres.DnnSuperResImpl_create()
     sr.readModel(model_path)
