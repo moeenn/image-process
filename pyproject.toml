@@ -9,5 +9,6 @@ dependencies = [
 
 [project.optional-dependencies]
 dev = [
-  "pyinstaller==6.16.0",  
+  "pyinstaller==6.16.0",
+  "ruff==0.15.13"
 ]

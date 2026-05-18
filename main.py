@@ -1,4 +1,4 @@
-from app import Application
+from app.app import Application
 
 
 def main() -> None:

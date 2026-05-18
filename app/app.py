@@ -1,8 +1,10 @@
-from dataclasses import dataclass
 import os
-from PIL import Image
+from dataclasses import dataclass
+
 import pillow_avif
+from PIL import Image
 from pillow_heif import register_heif_opener
+
 from .args import CommandLineArgs
 
 
@@ -64,7 +66,12 @@ class Application:
     def process_image(self, full_path: str, base_path: str, file: str) -> None:
         # uniform convert and resize image.
         image = Image.open(full_path).convert("RGB")
-        image.thumbnail(self.args.dimensions)
+
+        # calculate new height.
+        new_width = self.args.dimensions[0]
+        width_percent = new_width / float(image.size[0])
+        new_height = int((float(image.size[1]) * float(width_percent)))
+        image = image.resize((new_width, new_height), Image.Resampling.LANCZOS)
 
         out_dir = os.path.join(base_path, "out")
         if not os.path.exists(out_dir):
