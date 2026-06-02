@@ -1,10 +1,8 @@
 import os
 from dataclasses import dataclass
-
 import pillow_avif
 from PIL import Image
 from pillow_heif import register_heif_opener
-
 from .args import CommandLineArgs
 
 
